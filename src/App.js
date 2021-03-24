@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components'
+import { AddTodo } from './components/AddTodo'
+import { TodoList } from './components/TodoList'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
-export default App;
+const App = () => (
+  <Wrapper>
+    <h1>Todos...</h1>
+    <AddTodo />
+    <TodoList />
+  </Wrapper>
+)
+
+export default App
