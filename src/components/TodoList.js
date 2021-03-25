@@ -4,7 +4,7 @@ import { Todo } from './Todo'
 
 const Wrapper = styled.div`
   width: 90%;
-  max-width: 600px;
+  max-width: 400px;
 `
 
 export const TodoList = () => {

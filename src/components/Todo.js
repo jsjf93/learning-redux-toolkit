@@ -1,24 +1,44 @@
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { toggleTodo } from '../slices/todoSlice';
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
+import { toggleTodo, updateTodo } from '../slices/todoSlice'
 
 const Wrapper = styled.div`
-  border: 1px solid black;
   display: flex;
   margin-bottom: 5px;
-`;
+  background-color: ${props => props.isDone ? '#1ED64C' : '#C42021'};
+  color: #ffffff;
+  padding: 5px 10px;
+`
 
-const Checkbox = props => (
-  <input type="checkbox" {...props} />
-)
+const Input = styled.input`
+  width: 100%;
+`
+
+const Buttons = styled.div`
+  display: flex;
+`
+
+const Button = styled.button`
+  min-width: 100px;
+`
 
 export const Todo = ({ todo }) => {
-  const dispatch = useDispatch();
+  const [name, setName] = useState(todo.name || '')
+
+  const dispatch = useDispatch()
 
   return (
-    <Wrapper>
-      {todo.name}
-      <Checkbox value={todo.done} onClick={() => dispatch(toggleTodo(todo.id))} />
+    <Wrapper isDone={todo.done}>
+      <Input type="text" value={name} onChange={e => setName(e.target.value)} />
+      <Buttons>
+        <Button onClick={() => dispatch(updateTodo({ ...todo, name}))}>
+          Update
+        </Button>
+        <Button onClick={() => dispatch(toggleTodo(todo.id))}>
+          {todo.done ? 'Undo' : 'Mark as done'}
+        </Button>
+      </Buttons>
     </Wrapper>
   )
 }
